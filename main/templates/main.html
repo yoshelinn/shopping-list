@@ -1,66 +1,116 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page</h1>
+<style>
+    body {
+        background-color: #abd3cc;
+    }
+</style>
 
-    <h5>Name:</h5>
-    <p>{{name}}</p>
+<h1 style="color: #00a99d; font-size: 34px;">Selamat Datang di Yosheluxe</h1>
+<p>Elegance and Perfections Bags, Elevating Your Everyday.</p>
+<hr style="border: 2px solid #00a99d">
+<p>By: Yoshelin | PBP B | 2206826702</p>
+<hr style="border: 1px solid #00a99d">
+<p></p>
+<h5> Nama: </h5>
+<p>{{ name }}</p>
 
-    <h5>Class:</h5>
-    <p>{{class}}</p>
+<h5> Kelas: </h5>
+<p>{{ class }}</p>
+
+<h5> Produk: </h5>
+<p>{{ item }}</p>
+
+<p>Kamu telah menyimpan {{ items|length }} item pada aplikasi ini.</p>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 3px solid #00a99d;
+        text-align: left;
+        padding: 10px;
+    }
+
+    th {
+        background-color: #00a99d;
+    }
+
+    /* Added styles for buttons within the table */
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-buttons a {
+        margin: 2px 0;
+    }
+</style>
 
 <table>
     <tr>
         <th>Name</th>
         <th>Price</th>
+        <th>Amount</th>
         <th>Description</th>
         <th>Date Added</th>
+        <th>Actions</th> <!-- New column for buttons -->
     </tr>
-
-    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-    {% for product in products %}
+    {% for item in items %}
         <tr>
-            <td>{{product.name}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.date_added}}</td>
-        </tr>
-            <td>
-                <a href="{% url 'main:edit_product' product.pk %}">
-                    <button>
-                        Edit
-                    </button>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.date_added }}</td>
+            <td class="action-buttons">
+                <a href="{% url 'main:add_item' item.id %}">
+                    <button class="kustom">Add Item</button>
                 </a>
-
-                <a href="{% url 'main:delete_product' product.pk %}">
-                    <button>
-                        Delete
-                    </button>
+                <a href="{% url 'main:substract_item' item.id %}">
+                    <button class="kustom">Substract Item</button>
                 </a>
-                
+                <a href="{% url 'main:delete_item' item.id  %}">
+                    <button class="kustom">Delete Item</button>
+                </a>
             </td>
-        </tr>  
-
-
+        </tr>
     {% endfor %}
 </table>
 
 <br />
 
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
 <a href="{% url 'main:create_product' %}">
-    <button>
-        Add New Product
-    </button>
+    <button class="kustom">Add New Item</button>
 </a>
 
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
+<style>
+    h5 {
+        font-size: 18px;
+    }
 
+    p {
+        font-size: 16px;
+    }
+</style>
+
+<style>
+    .kustom {
+        background-color: #00a99d; 
+        color: #FFFFFF; 
+        padding: 12px 15px;
+        border: none;
+        border-radius: 15px;
+        font-size: 16px; 
+        /* cursor: pointer; */
+    }
+</style>
+
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 
 {% endblock content %}
