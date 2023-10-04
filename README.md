@@ -1,3 +1,5 @@
-"# shopping-list" 
-"# shopping_list" 
-"# shopping_list" 
+Yoshelin Yamala Vijnana
+
+Kelas PBP B
+
+NPM 2206826702
